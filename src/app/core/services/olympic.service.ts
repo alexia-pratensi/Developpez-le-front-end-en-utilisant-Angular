@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject,throwError} from 'rxjs';
-import { catchError, tap, retry} from 'rxjs/operators';
+import { catchError, tap, retry, take} from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -25,12 +25,12 @@ export class OlympicService {
     );
   }
 
-  // method to get data as observable
   getOlympics() {
-    return this.olympics$.asObservable().pipe(
+    return this.loadInitialData().pipe(
+      take(1),
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError)
-    );
+      )
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -48,11 +48,3 @@ export class OlympicService {
     }
 
   }
-
-  // getOlympicByCountry(name: string): Observable<Olympic | undefined> {
-  //   return this.olympics$.asObservable().pipe(
-  //     map((olympics) => olympics.find((olympic) => olympic.country === name)),
-  //     retry(3), // retry a failed request up to 3 times
-  //     catchError(this.handleError)
-  //   )
-  // }

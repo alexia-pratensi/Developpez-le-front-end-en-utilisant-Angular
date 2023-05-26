@@ -51,6 +51,8 @@ export class DetailComponent implements OnInit, OnDestroy {
 
         // To find olympic by country name compared on the Url
         const olympicFound = olympics.find((olympic) => olympic.country === olympicCountry)
+        console.log(olympics)
+        console.log(olympicFound)
 
         if (olympicFound !== undefined) {
 
