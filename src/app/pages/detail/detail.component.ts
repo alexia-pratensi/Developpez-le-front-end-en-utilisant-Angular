@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -88,10 +88,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
   onSelect(data: {"name": string, "series": {"name": string, "value": number}[]} []): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
+  // Methods onActivate/onDeactivate to display data when the user hover the country in the chart
   onActivate(data: {"name": string, "series": {"name": string, "value": number}[]} []): void {
     console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
