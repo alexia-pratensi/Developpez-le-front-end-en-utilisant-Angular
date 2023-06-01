@@ -78,7 +78,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           }];
 
         } else {
-          // To redirect in the previous page (homeComponent)
+          // To redirect on the NotFoundComponent
           this.router.navigateByUrl(`/${olympicCountry}/not-found`)
         }
       }
